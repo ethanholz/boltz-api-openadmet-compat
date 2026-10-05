@@ -1,0 +1,28 @@
+[project]
+name = "boltz-api-openadmet-compat"
+version = "0.1.0"
+description = "OpenADMET Boltz-Compatible ADME REST API"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+authors = [{ name = "Ethan Holz", email = "ethan.holz@thoriumworks.com" }]
+dependencies = [
+  "boltz-api>=0.45.0,<0.46",
+  "fastapi>=0.115,<1",
+  "httpx>=0.28,<1",
+  "pytest>=8,<9",
+  "uvicorn>=0.34,<1",
+]
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "osx-64", "linux-64", "linux-aarch64"]
+
+[tool.pixi.dependencies]
+python = ">=3.12,<3.13"
+
+[tool.pixi.tasks]
+serve = "uvicorn app:app --host 0.0.0.0 --port 8000"
+test = "python -m pytest -q"
+download-model = "python scripts/download_model.py"
+test-live = "python tests/live_test.py"
+test-live-container = "sh scripts/test_live_container.sh"

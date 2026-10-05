@@ -1,0 +1,8 @@
+# pixi environments
+.pixi/*
+!.pixi/config.toml
+
+# downloaded model weights
+models/
+
+__pycache__
